@@ -1,0 +1,40 @@
+{
+    "name": "decentralance",
+    "version": "1.0.0",
+    "description": "Custom Celo Composer project.",
+    "private": true,
+    "author": "Celo",
+    "license": "MIT",
+    "scripts": {
+        "react-native-app:start": "yarn workspace @decentralance/react-native-app start",
+        "react-native-app:android": "yarn workspace @decentralance/react-native-app android",
+        "react-native-app:ios": "yarn workspace @decentralance/react-native-app ios",
+        "react-native-app:web": "yarn workspace @decentralance/react-native-app web",
+        "react-native-app:eject": "yarn workspace @decentralance/react-native-app eject",
+        "react-native-app:test": "yarn workspace @decentralance/react-native-app test",
+        "hardhat:test": "yarn workspace @decentralance/hardhat test",
+        "hardhat:test-local": "yarn workspace @decentralance/hardhat test-local",
+        "hardhat:create-account": "yarn workspace @decentralance/hardhat create-account",
+        "hardhat:accounts": "yarn workspace @decentralance/hardhat accounts",
+        "hardhat:devchain": "yarn workspace @decentralance/hardhat devchain",
+        "hardhat:deploy": "yarn workspace @decentralance/hardhat deploy",
+        "hardhat:deploy-reset-watch": "yarn workspace @decentralance/hardhat deploy-reset-watch",
+        "hardhat:watch": "yarn workspace @decentralance/hardhat watch",
+        "hardhat:fork-mainnet": "yarn workspace @decentralance/hardhat fork-mainnet"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/celo-org/celo-composer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/celo-org/celo-composer/issues"
+    },
+    "homepage": "https://github.com/celo-org/celo-composer/blob/main/README.md",
+    "workspaces": [
+        "packages/*"
+    ],
+    "keywords": [
+        "celo-composer",
+        "celo"
+    ]
+}
