@@ -1,14 +1,16 @@
-import { useWalletConnect } from "@walletconnect/react-native-dapp";
-import Button from "./Button";
-import { Text } from "./Themed";
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
+import Button from './Button';
+import { Text } from './Themed';
+import { Pressable } from 'react-native';
 
 const ConnectWallet = () => {
-    const connector = useWalletConnect();
-    return (
-        <Button onPress={() => connector.connect()}>
-            <Text style={{ fontSize: 16, color: "white" }}>Connect Wallet</Text>
-        </Button>
-    );
+  const { provider, isConnected } = useWalletConnectModal();
+  
+  return (
+    <Pressable onPress={open}>
+      <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+    </Pressable>
+  );
 };
 
 export default ConnectWallet;

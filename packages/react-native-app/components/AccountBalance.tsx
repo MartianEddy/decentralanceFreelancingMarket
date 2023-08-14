@@ -1,10 +1,10 @@
 import { Text, View } from "./Themed";
-import { useWeb3Modal } from "@web3modal/react-native";
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 import { useEffect, useState } from "react";
 
 const AccountBalance = () => {
     const [balances, setBalances] = useState<any>(null);
-    const { address } = useWeb3Modal();
+    const { address } = useWalletConnectModal();
 
     return (
         <View>

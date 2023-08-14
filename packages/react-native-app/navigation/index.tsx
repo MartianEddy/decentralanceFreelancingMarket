@@ -22,8 +22,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import LoginScreen from "../screens/LoginScreen";
 import Account from "../screens/Account";
 import Docs from "../screens/Docs";
-import { useWeb3Modal } from "@web3modal/react-native";
-
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 export default function Navigation({
     colorScheme,
 }: {
@@ -46,7 +45,7 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-    const { isConnected } = useWeb3Modal();
+    const { isConnected } = useWalletConnectModal();
     return (
         <Stack.Navigator>
             {isConnected ? (

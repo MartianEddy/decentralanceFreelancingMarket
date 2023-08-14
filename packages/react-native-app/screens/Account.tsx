@@ -6,13 +6,13 @@ import { ThemeContext } from "../context/ThemeProvider";
 import AccountAddress from "../components/AccountAddress";
 import AccountBalance from "../components/AccountBalance";
 import Colors from "../constants/Colors";
-import { useWeb3Modal } from "@web3modal/react-native";
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 import { BlockchainActions } from "../components/BlockchainActions";
 
 export default function Account() {
-    const { address, provider } = useWeb3Modal();
+    const { address, provider } = useWalletConnectModal();
     const { styles } = useContext(ThemeContext);
-    const [accountLink, setAccountLink] = useState();
+    const [accountLink, setAccountLink] = useState("");
     useEffect(() => {
         setAccountLink(`https://celoscan.io/address/${address}`);
     }, [address]);

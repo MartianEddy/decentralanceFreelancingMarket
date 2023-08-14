@@ -1,25 +1,22 @@
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { RootStackScreenProps } from "../types";
 import { View } from "../components/Themed";
-import { Web3Button } from "@web3modal/react-native";
+import {
+  useWalletConnectModal,
+} from '@walletconnect/modal-react-native';
+
 
 export default function LoginScreen({
     navigation,
 }: RootStackScreenProps<"Root">) {
+		  const { open, isConnected } = useWalletConnectModal();
+
     return (
-        <View style={styles.container}>
-            <Web3Button
-                style={[
-                    { backgroundColor: "black" },
-                    {
-                        paddingHorizontal: 15,
-                        paddingVertical: 7,
-                        marginTop: 10,
-                        borderRadius: 5,
-                    },
-                ]}
-            />
-        </View>
+      <View style={styles.container}>
+        <Pressable onPress={open}>
+          <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+        </Pressable>
+      </View>
     );
 }
 
