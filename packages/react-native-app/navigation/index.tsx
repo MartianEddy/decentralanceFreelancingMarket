@@ -22,6 +22,11 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import LoginScreen from "../screens/LoginScreen";
 import Account from "../screens/Account";
 import Docs from "../screens/Docs";
+import Jobs from '../screens/Jobs';
+import Bids from '../screens/Bids';
+
+
+
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 export default function Navigation({
     colorScheme,
@@ -84,41 +89,60 @@ function BottomTabNavigator() {
     const theme = useColorScheme();
 
     return (
-        <SafeAreaProvider>
-            <BottomTab.Navigator
-                // first screen visible after login
-                initialRouteName="Docs"
-                screenOptions={{
-                    headerShown: false,
-                    tabBarActiveTintColor: Colors["brand"].light.text,
-                    tabBarActiveBackgroundColor:
-                        Colors["brand"][theme].background,
-                    tabBarLabelStyle: { textAlign: "center" },
-                }}
-            >
-                <BottomTab.Screen
-                    name="Docs"
-                    options={() => ({
-                        tabBarIcon: () => {
-                            return <></>;
-                        },
-                        tabBarLabelPosition: "beside-icon",
-                    })}
-                    component={Docs}
-                />
-                <BottomTab.Screen
-                    name="Account"
-                    component={Account}
-                    options={() => ({
-                        title: "Account",
-                        headerShown: false,
-                        tabBarIcon: () => {
-                            return <></>;
-                        },
-                        tabBarLabelPosition: "beside-icon",
-                    })}
-                />
-            </BottomTab.Navigator>
-        </SafeAreaProvider>
+      <SafeAreaProvider>
+        <BottomTab.Navigator
+          // first screen visible after login
+          initialRouteName='Home'
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: Colors['brand'].light.text,
+            tabBarActiveBackgroundColor: Colors['brand'][theme].background,
+            tabBarLabelStyle: { textAlign: 'center' },
+          }}
+        >
+          <BottomTab.Screen
+            name='Home'
+            options={() => ({
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+            component={Docs}
+          />
+          <BottomTab.Screen
+            name='Jobs'
+            options={() => ({
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+            component={Jobs}
+          />
+          <BottomTab.Screen
+            name='Bids'
+            options={() => ({
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+            component={Bids}
+          />
+          <BottomTab.Screen
+            name='Profile'
+            component={Account}
+            options={() => ({
+              title: 'Profile',
+              headerShown: false,
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+          />
+        </BottomTab.Navigator>
+      </SafeAreaProvider>
     );
 }

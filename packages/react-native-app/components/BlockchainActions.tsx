@@ -24,7 +24,7 @@ import Button from "./Button";
 export function BlockchainActions() {
     const [rpcResponse, setRpcResponse] = useState<FormattedRpcResponse>();
     const [rpcError, setRpcError] = useState<FormattedRpcError>();
-    const {provider, isConnected, } = useWalletConnectModal();
+    const {provider, isConnected, open, } = useWalletConnectModal();
 
     const web3Provider = useMemo(
         () =>

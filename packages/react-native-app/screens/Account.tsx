@@ -29,7 +29,7 @@ export default function Account() {
                     <AccountAddress />
                     <AccountBalance />
                 </Button>
-                <BlockchainActions />
+                {/* <BlockchainActions /> */}
             </View>
             <Button onPress={() => provider?.disconnect()}>
                 <Text style={{ color: Colors.brand.snow }}>
