@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { Text, View } from "../components/Themed";
 import Button from "../components/Button";
 import * as WebBrowser from "expo-web-browser";
@@ -8,11 +8,23 @@ import AccountBalance from "../components/AccountBalance";
 import Colors from "../constants/Colors";
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 import { BlockchainActions } from "../components/BlockchainActions";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Account() {
+export default function Profile() {
     const { address, provider } = useWalletConnectModal();
     const { styles } = useContext(ThemeContext);
     const [accountLink, setAccountLink] = useState("");
+
+
+   const navigation = useNavigation();
+
+   useLayoutEffect(() => {
+     navigation.setOptions({
+       headerShown: true,
+     });
+   }, []);
+
+
     useEffect(() => {
         setAccountLink(`https://celoscan.io/address/${address}`);
     }, [address]);
@@ -22,8 +34,8 @@ export default function Account() {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.innerContainer}>
+        <View>
+            <View >
                 <Text style={styles.title}>Connected As:</Text>
                 <Button style={styles.externalLink} onPress={handlePress}>
                     <AccountAddress />

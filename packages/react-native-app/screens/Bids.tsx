@@ -1,9 +1,22 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useContext, useLayoutEffect } from 'react'
+import { ThemeContext } from '../context/ThemeProvider';
+import { useNavigation } from '@react-navigation/native';
 
 const Bids = () => {
+	  const { styles } = useContext(ThemeContext);
+
+     const navigation = useNavigation();
+
+     useLayoutEffect(() => {
+       navigation.setOptions({
+         headerShown: true,
+       });
+     }, []);
+
+
   return (
-	<View>
+	<View style={styles.container}>
 	  <Text>Bids</Text>
 	</View>
   )

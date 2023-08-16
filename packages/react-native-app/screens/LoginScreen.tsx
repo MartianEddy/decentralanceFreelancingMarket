@@ -4,6 +4,7 @@ import { View } from "../components/Themed";
 import {
   useWalletConnectModal,
 } from '@walletconnect/modal-react-native';
+import Button from "../components/Button";
 
 
 export default function LoginScreen({
@@ -14,7 +15,7 @@ export default function LoginScreen({
     return (
       <View style={styles.container}>
         <Pressable onPress={open}>
-          <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+          <Button>{isConnected ? 'View Account' : 'Connect'}</Button>
         </Pressable>
       </View>
     );
