@@ -1,8 +1,8 @@
 import React from "react";
-import { useWeb3Modal, Web3Button } from "@web3modal/react-native";
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 import { ethers } from "ethers";
 import { useMemo, useState } from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import type {
     AccountAction,
@@ -24,7 +24,7 @@ import Button from "./Button";
 export function BlockchainActions() {
     const [rpcResponse, setRpcResponse] = useState<FormattedRpcResponse>();
     const [rpcError, setRpcError] = useState<FormattedRpcError>();
-    const { provider } = useWeb3Modal();
+    const {provider, isConnected, open, } = useWalletConnectModal();
 
     const web3Provider = useMemo(
         () =>
@@ -113,49 +113,41 @@ export function BlockchainActions() {
     };
 
     return (
-        <>
-            <FlatList
-                data={getEthereumActions()}
-                ListHeaderComponent={
-                    <Web3Button
-                        style={[
-                            { backgroundColor: "black" },
-                            {
-                                paddingHorizontal: 15,
-                                paddingVertical: 7,
-                                marginTop: 10,
-                                borderRadius: 5,
-                            },
-                        ]}
-                    />
-                }
-                contentContainerStyle={styles.listContent}
-                renderItem={({ item }) => (
-                    <Button
-                        style={[
-                            { backgroundColor: "black" },
-                            {
-                                paddingHorizontal: 15,
-                                paddingVertical: 7,
-                                marginTop: 10,
-                                borderRadius: 5,
-                            },
-                        ]}
-                        key={item.method}
-                        onPress={() => item.callback(web3Provider)}
-                    >
-                        <Text style={styles.buttonText}>{item.method}</Text>
-                    </Button>
-                )}
-            />
-            <RequestModal
-                rpcResponse={rpcResponse}
-                rpcError={rpcError}
-                isLoading={loading}
-                isVisible={modalVisible}
-                onClose={onModalClose}
-            />
-        </>
+      <>
+        <FlatList
+          data={getEthereumActions()}
+          ListHeaderComponent={
+            <Pressable onPress={open}>
+              <Text>{isConnected ? 'View Account' : 'Connect'}</Text>
+            </Pressable>
+          }
+          contentContainerStyle={styles.listContent}
+          renderItem={({ item }) => (
+            <Button
+              style={[
+                { backgroundColor: 'black' },
+                {
+                  paddingHorizontal: 15,
+                  paddingVertical: 7,
+                  marginTop: 10,
+                  borderRadius: 5,
+                },
+              ]}
+              key={item.method}
+              onPress={() => item.callback(web3Provider)}
+            >
+              <Text style={styles.buttonText}>{item.method}</Text>
+            </Button>
+          )}
+        />
+        <RequestModal
+          rpcResponse={rpcResponse}
+          rpcError={rpcError}
+          isLoading={loading}
+          isVisible={modalVisible}
+          onClose={onModalClose}
+        />
+      </>
     );
 }
 

@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
     NavigationContainer,
@@ -20,22 +20,26 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import LoginScreen from "../screens/LoginScreen";
-import Account from "../screens/Account";
-import Docs from "../screens/Docs";
-import { useWeb3Modal } from "@web3modal/react-native";
+import Profile from "../screens/Profile";
+import Home from "../screens/Home";
+import Jobs from '../screens/Jobs';
+import Bids from '../screens/Bids';
 
+
+
+import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 export default function Navigation({
     colorScheme,
 }: {
-    colorScheme: ColorSchemeName;
+    colorScheme: ColorSchemeName
 }) {
     return (
-        <NavigationContainer
-            linking={LinkingConfiguration}
-            theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-            <RootNavigator />
-        </NavigationContainer>
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      >
+          <RootNavigator />
+      </NavigationContainer>
     );
 }
 
@@ -46,7 +50,7 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-    const { isConnected } = useWeb3Modal();
+    const { isConnected } = useWalletConnectModal();
     return (
         <Stack.Navigator>
             {isConnected ? (
@@ -85,41 +89,60 @@ function BottomTabNavigator() {
     const theme = useColorScheme();
 
     return (
-        <SafeAreaProvider>
-            <BottomTab.Navigator
-                // first screen visible after login
-                initialRouteName="Docs"
-                screenOptions={{
-                    headerShown: false,
-                    tabBarActiveTintColor: Colors["brand"].light.text,
-                    tabBarActiveBackgroundColor:
-                        Colors["brand"][theme].background,
-                    tabBarLabelStyle: { textAlign: "center" },
-                }}
-            >
-                <BottomTab.Screen
-                    name="Docs"
-                    options={() => ({
-                        tabBarIcon: () => {
-                            return <></>;
-                        },
-                        tabBarLabelPosition: "beside-icon",
-                    })}
-                    component={Docs}
-                />
-                <BottomTab.Screen
-                    name="Account"
-                    component={Account}
-                    options={() => ({
-                        title: "Account",
-                        headerShown: false,
-                        tabBarIcon: () => {
-                            return <></>;
-                        },
-                        tabBarLabelPosition: "beside-icon",
-                    })}
-                />
-            </BottomTab.Navigator>
-        </SafeAreaProvider>
+      <SafeAreaProvider>
+        <BottomTab.Navigator
+          // first screen visible after login
+          initialRouteName='Home'
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: Colors['brand'].light.text,
+            tabBarActiveBackgroundColor: Colors['brand'][theme].background,
+            tabBarLabelStyle: { textAlign: 'center' },
+          }}
+        >
+          <BottomTab.Screen
+            name='Home'
+            options={() => ({
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+            component={Home}
+          />
+          <BottomTab.Screen
+            name='Jobs'
+            options={() => ({
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+            component={Jobs}
+          />
+          <BottomTab.Screen
+            name='Bids'
+            options={() => ({
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+            component={Bids}
+          />
+          <BottomTab.Screen
+            name='Profile'
+            component={Profile}
+            options={() => ({
+              title: 'Profile',
+              headerShown: false,
+              tabBarIcon: () => {
+                return <></>;
+              },
+              tabBarLabelPosition: 'beside-icon',
+            })}
+          />
+        </BottomTab.Navigator>
+      </SafeAreaProvider>
     );
 }
